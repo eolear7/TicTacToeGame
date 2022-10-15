@@ -5,7 +5,7 @@ class Player:
   def __init__(self):
     self.name = ""
     self.shape = ""
-    self.position=[0,0]
+    self.position=[5,5]
     self.choice = 0
 
   def __repr__(self):
@@ -19,6 +19,7 @@ def coin_toss(player1, player2):
   validate_P1 = 0
   validate_P2 = 0
   #make validate player choice into a function that lives outside coin_toss to reduce lines of code 
+  print("We will now select a number between 1-5 to decide who goes first. The person who picks a number closest to the random number selection goes first! \n")
   while validate_P1 == 0: 
     player1.choice = input("{} select a number between 1-5: \n".format(player1.name))
     if int(player1.choice) in list(range(1,6)):
@@ -35,7 +36,7 @@ def coin_toss(player1, player2):
       print("Invalid number, {} please input a number between 1-5!!!!!!!\n".format(player2.name))
       
 
-  chance = random.randint(1,9)
+  chance = random.randint(1,5)
   print("The random number selected was {}".format(chance))
   selection = 0
   if (abs((chance - int(player1.choice))) < abs((chance - int(player2.choice)))):
@@ -58,7 +59,7 @@ def coin_toss(player1, player2):
 #define logic to play tic tac toe 
 def play_game(player1, player2):
   matrix = [["","",""], ["","",""], ["","",""]]
-  print("Let's play tic tac toe!!!!!!!!!")
+  print("Let's play tic tac toe!!!!!!!!! \nWe will be playing on a 3x3 board.")
   
   validateP1_name =0
   validateP2_name =0
@@ -102,11 +103,11 @@ def play_game(player1, player2):
       player2.shape = input("Which shape is {} using: \"X\" or \"O\" ".format(player2.name))
       if player2.shape == "X":
         player1.shape = "O"
-        print("{}'s shape is {} and {}'s shape is {}, let's begin!".format(player1.name,player1.shape, player2.name, player2.shape))
+        print("{}'s shape is {} and {}'s shape is {}, let's begin!\n\n".format(player1.name,player1.shape, player2.name, player2.shape))
         validateP2_shape = 1
       elif player2.shape == "O":
         player1.shape = "X"
-        print("{}'s shape is {} and {}'s shape is {}, let's begin!".format(player1.name,player1.shape, player2.name, player2.shape))
+        print("{}'s shape is {} and {}'s shape is {}, let's begin!\n\n".format(player1.name,player1.shape, player2.name, player2.shape))
         validateP2_shape = 1
       else:
         print("Not a valid shape, {} please select either \"X\" or \"O\" ".format(player2.name))
@@ -121,11 +122,27 @@ def play_game(player1, player2):
   else:
     first_player = player2
     second_player = player1
-  
+  print(matrix[0])
+  print(matrix[1])
+  print("{} \n".format(matrix[2]))
   while winner == 0:
-    #add logic that checks if their choice was between 0-2
-    first_player.position[0] = input("{}, what row would you like to place your {} shape? Pick a number between 0-2: ".format(first_player.name,first_player.shape))
-    first_player.position[1] = input("{}, what column would you like to place your {} shape? Pick a number between 0-2: ".format(first_player.name,first_player.shape))
+    
+    row_check = 0
+    column_check = 0
+    while row_check==0 :
+      first_player.position[0] = input("{}, what row would you like to place your {} shape? Pick a number between 0-2: ".format(first_player.name,first_player.shape))
+      if int(first_player.position[0]) in list(range(0,3)):
+        row_check =1
+      else:
+        print("Invalid row choice. Please select a number between 0-2")
+
+    while column_check ==0:
+      first_player.position[1] = input("{}, what column would you like to place your {} shape? Pick a number between 0-2: ".format(first_player.name,first_player.shape))
+      if int(first_player.position[1]) in list(range(0,3)):
+        column_check=1 
+      else:
+        print("Invalid column choice. Please select a number between 0-2")
+
     temp_row1 = int(first_player.position[0])
     temp_col1 = int(first_player.position[1])
     matrix[temp_row1][temp_col1] = str(first_player.shape) 
@@ -189,8 +206,23 @@ def play_game(player1, player2):
       
   
     #add logic that checks if their choice was between 0-2
-    second_player.position[0] = input("{}, what row would you like to place your {} shape: ".format(second_player.name,second_player.shape))
-    second_player.position[1] = input("{}, what column would you like to place your {} shape: ".format(second_player.name,second_player.shape))
+    row_check = 0
+    column_check = 0
+    while row_check==0 :
+      second_player.position[0] = input("{}, what row would you like to place your {} shape? Pick a number between 0-2: ".format(second_player.name,second_player.shape))
+      if int(second_player.position[0]) in list(range(0,3)):
+        row_check =1
+      else:
+        print("Invalid row choice. Please select a number between 0-2")
+
+    while column_check ==0:
+      second_player.position[1] = input("{}, what column would you like to place your {} shape? Pick a number between 0-2: ".format(second_player.name,second_player.shape))
+      if int(second_player.position[1]) in list(range(0,3)):
+        column_check=1 
+      else:
+        print("Invalid column choice. Please select a number between 0-2")
+
+
     temp_row2 = int(second_player.position[0])
     temp_col2 = int(second_player.position[1]) 
     matrix[temp_row2][temp_col2] = str(second_player.shape) 
