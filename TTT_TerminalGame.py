@@ -116,6 +116,7 @@ def play_game(player1, player2):
 
   #Logic to put shapes in matrix --------------------------------------------
   winner=0
+  turn_counter = 0
   if player_sel==1:
     first_player = player1
     second_player= player2
@@ -125,6 +126,7 @@ def play_game(player1, player2):
   print(matrix[0])
   print(matrix[1])
   print("{} \n".format(matrix[2]))
+  
   while winner == 0:
     
     row_check = 0
@@ -146,6 +148,7 @@ def play_game(player1, player2):
     temp_row1 = int(first_player.position[0])
     temp_col1 = int(first_player.position[1])
     matrix[temp_row1][temp_col1] = str(first_player.shape) 
+    turn_counter+=1
     print(matrix[0])
     print(matrix[1])
     print("{} \n".format(matrix[2]))
@@ -203,7 +206,10 @@ def play_game(player1, player2):
       print("{} is the winner of tic tac toe!!!!!".format(first_player.name))
     if winner == 1:
       break    
-      
+
+    if turn_counter > 8:
+      print("Players have exceeded the maximum number of turns without a winner, game over")
+      break  
   
     #add logic that checks if their choice was between 0-2
     row_check = 0
@@ -226,6 +232,7 @@ def play_game(player1, player2):
     temp_row2 = int(second_player.position[0])
     temp_col2 = int(second_player.position[1]) 
     matrix[temp_row2][temp_col2] = str(second_player.shape) 
+    turn_counter+=1
     print(matrix[0])
     print(matrix[1])
     print("{} \n".format(matrix[2]))
@@ -244,6 +251,7 @@ def play_game(player1, player2):
     if winner == 1:
       break
 
+    
  
     for i in list(range(0,3)):
       second_player_shape_counter = 0
@@ -283,6 +291,11 @@ def play_game(player1, player2):
       print("{} is the winner of tic tac toe!!!!!".format(second_player.name))
     if winner == 1:
       break
+    
+    if turn_counter > 8:
+      print("Players have exceeded the maximum number of turns without a winner, game over")
+      break
+
 
 
 player1=Player()
